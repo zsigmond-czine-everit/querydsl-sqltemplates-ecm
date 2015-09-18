@@ -1,0 +1,1 @@
+# querydsl-sqltemplates-ecm
