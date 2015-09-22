@@ -32,8 +32,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentException;
 
-import com.mysema.query.sql.SQLTemplates;
-import com.mysema.query.sql.SQLTemplates.Builder;
+import com.querydsl.sql.SQLTemplates;
+import com.querydsl.sql.SQLTemplates.Builder;
 
 import aQute.bnd.annotation.headers.ProvideCapability;
 

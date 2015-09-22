@@ -15,20 +15,20 @@
  */
 package org.everit.persistence.querydsl.sqltemplates.osgi.ecm;
 
-import com.mysema.query.sql.CUBRIDTemplates;
-import com.mysema.query.sql.DerbyTemplates;
-import com.mysema.query.sql.H2Templates;
-import com.mysema.query.sql.HSQLDBTemplates;
-import com.mysema.query.sql.MySQLTemplates;
-import com.mysema.query.sql.OracleTemplates;
-import com.mysema.query.sql.PostgresTemplates;
-import com.mysema.query.sql.SQLServer2005Templates;
-import com.mysema.query.sql.SQLServer2008Templates;
-import com.mysema.query.sql.SQLServer2012Templates;
-import com.mysema.query.sql.SQLServerTemplates;
-import com.mysema.query.sql.SQLTemplates.Builder;
-import com.mysema.query.sql.SQLiteTemplates;
-import com.mysema.query.sql.TeradataTemplates;
+import com.querydsl.sql.CUBRIDTemplates;
+import com.querydsl.sql.DerbyTemplates;
+import com.querydsl.sql.H2Templates;
+import com.querydsl.sql.HSQLDBTemplates;
+import com.querydsl.sql.MySQLTemplates;
+import com.querydsl.sql.OracleTemplates;
+import com.querydsl.sql.PostgreSQLTemplates;
+import com.querydsl.sql.SQLServer2005Templates;
+import com.querydsl.sql.SQLServer2008Templates;
+import com.querydsl.sql.SQLServer2012Templates;
+import com.querydsl.sql.SQLServerTemplates;
+import com.querydsl.sql.SQLTemplates.Builder;
+import com.querydsl.sql.SQLiteTemplates;
+import com.querydsl.sql.TeradataTemplates;
 
 /**
  * Types of DBMS.
@@ -126,7 +126,7 @@ public enum DBMSType {
 
     @Override
     public Builder getSQLTemplatesBuilder() {
-      return PostgresTemplates.builder();
+      return PostgreSQLTemplates.builder();
     }
 
     @Override

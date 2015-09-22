@@ -28,7 +28,7 @@ import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.SQLTemplatesConstan
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
-import com.mysema.query.sql.SQLTemplates;
+import com.querydsl.sql.SQLTemplates;
 
 /**
  * Abstract SQL Templates component information and process.

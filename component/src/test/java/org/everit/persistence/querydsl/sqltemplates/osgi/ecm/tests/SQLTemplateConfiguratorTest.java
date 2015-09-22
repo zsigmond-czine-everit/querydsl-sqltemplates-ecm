@@ -26,8 +26,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.osgi.service.component.ComponentException;
 
-import com.mysema.query.sql.H2Templates;
-import com.mysema.query.sql.SQLTemplates.Builder;
+import com.querydsl.sql.H2Templates;
+import com.querydsl.sql.SQLTemplates.Builder;
 
 public class SQLTemplateConfiguratorTest {
 

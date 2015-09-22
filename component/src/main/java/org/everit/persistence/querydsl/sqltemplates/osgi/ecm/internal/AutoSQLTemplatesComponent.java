@@ -36,8 +36,8 @@ import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentException;
 import org.osgi.service.log.LogService;
 
-import com.mysema.query.sql.SQLTemplates;
-import com.mysema.query.sql.SQLTemplates.Builder;
+import com.querydsl.sql.SQLTemplates;
+import com.querydsl.sql.SQLTemplates.Builder;
 
 import aQute.bnd.annotation.headers.ProvideCapability;
 
@@ -96,11 +96,10 @@ public class AutoSQLTemplatesComponent extends AbstractSQLTemplatesComponent {
     new SQLTemplateConfigurator(sqlTemplateBuilder, componentProperties).configure();
 
     sqlTemplates = sqlTemplateBuilder.build();
-    Map<String, Object> updatedComponentProperties = new HashMap<>();
-    updatedComponentProperties.putAll(componentProperties);
+    Map<String, Object> updatedComponentProperties = new HashMap<>(componentProperties);
     updatedComponentProperties.put(SQLTemplatesConstants.ATTR_SELECTED_TEMPLATE,
         sqlTemplateBuilder.getClass().getName());
-    super.activate(context, componentProperties);
+    super.activate(context, updatedComponentProperties);
 
     logService.log(LogService.LOG_INFO,
         "Selected template: " + sqlTemplateBuilder.getClass().getName());
