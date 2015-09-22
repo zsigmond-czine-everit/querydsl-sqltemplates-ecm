@@ -17,6 +17,7 @@ package org.everit.persistence.querydsl.sqltemplates.osgi.ecm.internal;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -95,8 +96,9 @@ public class AutoSQLTemplatesComponent extends AbstractSQLTemplatesComponent {
     new SQLTemplateConfigurator(sqlTemplateBuilder, componentProperties).configure();
 
     sqlTemplates = sqlTemplateBuilder.build();
-
-    componentProperties.put(SQLTemplatesConstants.ATTR_SELECTED_TEMPLATE,
+    Map<String, Object> updatedComponentProperties = new HashMap<>();
+    updatedComponentProperties.putAll(componentProperties);
+    updatedComponentProperties.put(SQLTemplatesConstants.ATTR_SELECTED_TEMPLATE,
         sqlTemplateBuilder.getClass().getName());
     super.activate(context, componentProperties);
 
