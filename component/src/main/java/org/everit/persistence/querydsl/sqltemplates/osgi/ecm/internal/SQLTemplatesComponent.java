@@ -24,11 +24,12 @@ import org.everit.osgi.ecm.annotation.ConfigurationPolicy;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttributeOption;
 import org.everit.osgi.ecm.annotation.attribute.StringAttributes;
+import org.everit.osgi.ecm.component.ComponentContext;
 import org.everit.osgi.ecm.extender.ECMExtenderConstants;
 import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.DBMSType;
+import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.PriorityConstants;
 import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.SQLTemplatesConstants;
 import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.UnknownDatabaseTypeException;
-import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.ComponentException;
 
@@ -41,11 +42,15 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  * Component that instantiates and registers SQLTemapltes objects as OSGi service.
  */
 @Component(componentId = SQLTemplatesConstants.SERVICE_FACTORY_PID_SQL_TEMPLATES, metatype = true,
-    configurationPolicy = ConfigurationPolicy.FACTORY)
+    configurationPolicy = ConfigurationPolicy.FACTORY, label = "QueryDSL SQLTemplates (Everit)",
+    description = "By configuring this component, the user will get an SQLTemplate as an "
+        + "OSGi service.")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
 @StringAttributes({
     @StringAttribute(attributeId = SQLTemplatesConstants.ATTR_DB_TYPE,
+        priority = PriorityConstants.PRIORITY_01, label = "Database type",
+        description = "Type of the SQLTemplate which will be created.",
         defaultValue = DBMSType.TYPE_H2, options = {
             @StringAttributeOption(label = DBMSType.TYPE_H2,
                 value = DBMSType.TYPE_H2),
@@ -74,7 +79,9 @@ import aQute.bnd.annotation.headers.ProvideCapability;
             @StringAttributeOption(label = DBMSType.TYPE_SQLSERVER_2012,
                 value = DBMSType.TYPE_SQLSERVER_2012) }),
     @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION,
-        defaultValue = SQLTemplatesConstants.DEFAULT_SERVICE_DESCRIPTION_SQL_TEMPLATES) })
+        defaultValue = SQLTemplatesConstants.DEFAULT_SERVICE_DESCRIPTION_SQL_TEMPLATES,
+        label = "Service description",
+        description = "Optional description for the instantiated Jetty server.") })
 public class SQLTemplatesComponent extends AbstractSQLTemplatesComponent {
 
   private SQLTemplates sqlTemplate;
@@ -83,18 +90,13 @@ public class SQLTemplatesComponent extends AbstractSQLTemplatesComponent {
    * Configures an {@link SQLTemplates} instance based on {@code componentProperties} and registers
    * it as an OSGi service using {@code context}.
    *
-   * @param context
-   *          bundle context
-   * @param componentProperties
-   *          component properties
-   *
    * @throws ComponentException
    *           if problem with to create service register.
    */
-  @Override
   @Activate
-  public void activate(final BundleContext context, final Map<String, Object> componentProperties) {
+  public void activate(final ComponentContext<SQLTemplatesComponent> componentContext) {
     try {
+      Map<String, Object> componentProperties = componentContext.getProperties();
       Object dbTypeObject = componentProperties.get(SQLTemplatesConstants.ATTR_DB_TYPE);
       Builder sqlTemplateBuilder = instantiateBuilder((String) dbTypeObject);
       new SQLTemplateConfigurator(sqlTemplateBuilder, componentProperties).configure();
@@ -106,7 +108,7 @@ public class SQLTemplatesComponent extends AbstractSQLTemplatesComponent {
           + " property must be set and must be a String", e);
     }
 
-    super.activate(context, componentProperties);
+    registerService(componentContext);
   }
 
   @Override
