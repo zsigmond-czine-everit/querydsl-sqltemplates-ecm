@@ -21,7 +21,7 @@ import java.util.Objects;
 import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.SQLTemplatesConstants;
 import org.osgi.service.component.ComponentException;
 
-import com.querydsl.sql.SQLTemplates.Builder;
+import com.mysema.query.sql.SQLTemplates.Builder;
 
 /**
  * Sets the properties for an instantiated SQLTemplates builder based on the configuration of the

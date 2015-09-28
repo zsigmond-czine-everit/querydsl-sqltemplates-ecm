@@ -28,7 +28,7 @@ import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.PriorityConstants;
 import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.SQLTemplatesConstants;
 import org.osgi.framework.ServiceRegistration;
 
-import com.querydsl.sql.SQLTemplates;
+import com.mysema.query.sql.SQLTemplates;
 
 /**
  * Abstract SQL Templates component information and process.

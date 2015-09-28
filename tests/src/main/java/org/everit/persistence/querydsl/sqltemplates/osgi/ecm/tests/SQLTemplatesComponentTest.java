@@ -26,7 +26,7 @@ import org.everit.persistence.querydsl.sqltemplates.osgi.ecm.SQLTemplatesConstan
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.querydsl.sql.SQLTemplates;
+import com.mysema.query.sql.SQLTemplates;
 
 import aQute.bnd.annotation.headers.ProvideCapability;
 
